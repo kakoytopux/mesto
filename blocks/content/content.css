@@ -1,0 +1,8 @@
+.content {
+  margin-top: 40px;
+}
+@media screen and (max-width: 879px) {
+  .content {
+    margin-top: 42px;
+  }
+}

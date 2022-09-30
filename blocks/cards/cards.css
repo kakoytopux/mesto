@@ -1,0 +1,14 @@
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 17px;
+  margin-top: 51px;
+}
+@media screen and (max-width: 879px) {
+  .cards {
+    margin-top: 36px;
+    gap: 20px;
+  }
+}

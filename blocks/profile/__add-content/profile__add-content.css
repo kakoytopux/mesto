@@ -1,0 +1,24 @@
+.profile__add-content {
+  background-image: url(../../../images/add-button.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: opacity .4s ease;
+  color: #c0c0c0;
+  position: absolute;
+  top: 35px;
+  right: 0;
+  width: 22px;
+  height: 22px;
+  border: 2px solid #fff;
+  border-radius: 2px;
+  padding: 14px 64px;
+}
+@media screen and (max-width: 879px) {
+  .profile__add-content {
+    margin-top: 36px;
+    position: static;
+    width: 16px;
+    height: 16px;
+    padding: 17px 132px;
+  }
+}

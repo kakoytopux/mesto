@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Mesto - место, где можно поделиться своими впечатлениями.">
+  <meta name="keywords" content="Mesto, профиль, фотографии, лайки, посты">
+  <meta name="author" content="Puxichh">
+  <title>Mesto</title>
+  <link rel="icon" href="./images/logo.svg">
+  <link rel="stylesheet" href="./pages/index.css">
+</head>
+<body>
+  <div class="page">
+    <div class="all-content">
+      <header class="header">
+        <a href="#" class="header__logo-link" title="Mesto"><div class="header__logo"></div></a>
+      </header>
+      <main class="content">
+        <section class="profile">
+          <img src="./images/avatar.svg" alt="Аватарка" class="profile__avatar">
+          <div class="profile__info">
+            <h1 class="profile__name">Жак-Ив Кусто</h1>
+            <p class="profile__description">Исследователь океана</p>
+            <div class="profile__edit profile-button-hover" title="Редактировать"></div>
+          </div>
+          <div class="profile__add-content profile-button-hover" title="Добавить"></div>
+        </section>
+        <section class="cards">
+          <article class="card">
+            <img src="./images/karachaevsk.jpg" alt="Пейзаж" class="card__image">
+            <div class="card__block-text">
+              <h2 class="card__title">Карачаевск</h2>
+              <div class="card__like" title="Нравится"></div>
+            </div>
+          </article>
+          <article class="card">
+            <img src="./images/elbrus.jpg" alt="Пейзаж" class="card__image">
+            <div class="card__block-text">
+              <h2 class="card__title">Гора Эльбрус</h2>
+              <div class="card__like" title="Нравится"></div>
+            </div>
+          </article>
+          <article class="card">
+            <img src="./images/dombay.jpg" alt="Пейзаж" class="card__image">
+            <div class="card__block-text">
+              <h2 class="card__title">Домбай</h2>
+              <div class="card__like" title="Нравится"></div>
+            </div>
+          </article>
+          <article class="card">
+            <img src="./images/elbrus.jpg" alt="Пейзаж" class="card__image">
+            <div class="card__block-text">
+              <h2 class="card__title">Гора Эльбрус</h2>
+              <div class="card__like" title="Нравится"></div>
+            </div>
+          </article>
+          <article class="card">
+            <img src="./images/dombay.jpg" alt="Пейзаж" class="card__image">
+            <div class="card__block-text">
+              <h2 class="card__title">Домбай</h2>
+              <div class="card__like" title="Нравится"></div>
+            </div>
+          </article>
+          <article class="card">
+            <img src="./images/karachaevsk.jpg" alt="Пейзаж" class="card__image">
+            <div class="card__block-text">
+              <h2 class="card__title">Карачаево-Черкессия</h2>
+              <div class="card__like" title="Нравится"></div>
+            </div>
+          </article>
+        </section>
+      </main>
+      <footer class="footer">
+        <h3 class="footer__copyright">&copy; 2022 Mesto Russia</h3>
+      </footer>
+    </div>
+
+    <div class="popup">
+      <form class="popup__container">
+        <div class="popup__close" title="Закрыть"></div>
+        <h2 class="popup__title">Редактировать профиль</h2>
+        <input type="text" class="popup__field popup__field_type_name" placeholder="Жак-Ив Кусто" required minlength="3" maxlength="20">
+        <input type="text" class="popup__field popup__field_type_desc" placeholder="Исследователь океана" required minlength="5" maxlength="50">
+        <button type="submit" class="popup__submit">Сохранить</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="./pages/index.js"></script>
+</body>
+</html>
