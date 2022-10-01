@@ -1,13 +1,16 @@
 .profile__info {
   margin-left: 30px;
-  align-self: center;
   width: 336px;
-  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(min-content, max-content));
+  grid-template-rows: repeat(2, minmax(min-content, max-content));
+  justify-content: flex-start;
 }
 @media screen and (max-width: 879px) {
   .profile__info {
     margin: 22px 0 0 0;
     width: 300px;
+    justify-content: center;
   }
 }
 @media screen and (max-width: 583px) {

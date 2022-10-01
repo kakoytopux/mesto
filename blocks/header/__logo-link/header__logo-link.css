@@ -1,4 +1,14 @@
 .header__logo-link {
   display: block;
-  width: fit-content;
+  background-image: url(../../../images/logo.svg);
+  width: 142px;
+  height: 33px;
+  background-size: 142px 33px;
+}
+@media screen and (max-width: 583px) {
+  .header__logo-link {
+    width: 104px;
+    height: 25px;
+    background-size: 104px 25px;
+  }
 }

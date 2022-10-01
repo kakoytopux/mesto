@@ -3,7 +3,8 @@
   flex-wrap: wrap;
   align-items: flex-start;
   justify-content: center;
-  gap: 17px;
+  row-gap: 20px;
+  column-gap: 17px;
   margin-top: 51px;
 }
 @media screen and (max-width: 879px) {

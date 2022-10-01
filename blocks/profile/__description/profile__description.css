@@ -1,11 +1,14 @@
 .profile__description {
-  font-family: 'Inter';
   font-weight: 400;
   font-size: 18px;
   line-height: 22px;
   color: #fff;
   margin: 16px 0 0 0;
   width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  grid-row: 2/3;
 }
 @media screen and (max-width: 879px) {
   .profile__description {
