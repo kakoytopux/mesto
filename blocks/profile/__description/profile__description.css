@@ -4,9 +4,8 @@
   line-height: 22px;
   color: #fff;
   margin: 16px 0 0 0;
-  width: 100%;
+  max-width: 336px;
   text-overflow: ellipsis;
-  white-space: nowrap;
   overflow: hidden;
   grid-row: 2/3;
 }
@@ -16,5 +15,6 @@
     font-size: 14px;
     line-height: 19px;
     margin-top: 14px;
+    max-width: 282px;
   }
 }
