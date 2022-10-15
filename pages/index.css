@@ -9,7 +9,7 @@
 @import url(../blocks/cards/cards.css);
 
 @import url(../blocks/card/card.css);
-@import url(../blocks/card/__block-text/card__block-text.css);
+@import url(../blocks/card/__block/card__block.css);
 @import url(../blocks/card/__image/card__image.css);
 @import url(../blocks/card/__like/card__like.css);
 @import url(../blocks/card/__title/card__title.css);
