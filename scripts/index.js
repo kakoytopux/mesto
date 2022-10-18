@@ -138,8 +138,10 @@ editButton.addEventListener('click', openPopupEdit);
 addButton.addEventListener('click', openPopupAdd);
 
 popupExit.forEach(item => {
+  const nearest = item.closest('.popup');
+  
   item.addEventListener('click', () => {
-    closePopup(popupAdd) || closePopup(popupEdit) || closePopup(popupExpansion);
+    closePopup(nearest);
   });
 });
 
