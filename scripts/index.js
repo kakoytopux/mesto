@@ -108,7 +108,7 @@ const createCard = (name, link) => {
 
     imgExpansion.src = cardImg.src;
     titleExpansion.innerText = cardTitle.innerText;
-    imgExpansion.alt = titleExpansion.innerText;
+    imgExpansion.alt = cardTitle.innerText;
   });
 
   return renderCard(card);
