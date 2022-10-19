@@ -111,7 +111,7 @@ const createCard = (name, link) => {
     imgExpansion.alt = cardTitle.innerText;
   });
 
-  return renderCard(card);
+  return card;
 }
 
 // генерация карточек
@@ -121,14 +121,14 @@ const renderCard = element => {
 
 // перебор массива
 initialCards.reverse().forEach(nameArray => {
-  createCard(nameArray.name, nameArray.link);
+  renderCard(createCard(nameArray.name, nameArray.link));
 });
 
 // создание карточки
 const addCard = evt => {
   evt.preventDefault();
 
-  createCard(fieldTitle.value, fieldLink.value);
+  renderCard(createCard(fieldTitle.value, fieldLink.value));
 
   closePopup(popupAdd);
 }
