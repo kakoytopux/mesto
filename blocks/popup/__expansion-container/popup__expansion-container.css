@@ -1,3 +1,4 @@
 .popup__expansion-container {
   position: relative;
+  cursor: auto;
 }
