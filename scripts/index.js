@@ -68,11 +68,12 @@ const closePopup = element => {
 
   element.removeEventListener('keydown', evt => {
     if (evt.key === 'Escape') {
-      element.classList.remove('popup_opened');
+      closePopup(element);
     }
   });
 }
-const enumerationElements = element => {
+
+const searchEvent = element => {
   element.forEach(item => {
     const nearest = item.closest('.popup');
     
@@ -83,14 +84,14 @@ const enumerationElements = element => {
     });
   });
 }
-enumerationElements(popupExit);
-enumerationElements(popup);
+searchEvent(popupExit);
+searchEvent(popup);
 
 const openPopupEdit = () => {
   openPopup(popupEdit);
 
-  fieldName.value = profileName.innerText;
-  fieldDesc.value = profileDesc.innerText;
+  fieldName.value = profileName.textContent;
+  fieldDesc.value = profileDesc.textContent;
 }
 const openPopupAdd = () => {
   openPopup(popupAdd);
@@ -103,8 +104,8 @@ const openPopupAdd = () => {
 const editProfile = evt => {
   evt.preventDefault();
 
-  profileName.innerText = fieldName.value;
-  profileDesc.innerText = fieldDesc.value;
+  profileName.textContent = fieldName.value;
+  profileDesc.textContent = fieldDesc.value;
 
   closePopup(popupEdit);
 }
@@ -121,7 +122,7 @@ const createCard = (name, link) => {
 
   cardImg.src = link;
   cardImg.alt = name;
-  cardTitle.innerText = name;
+  cardTitle.textContent = name;
 
   // card delete
   basket.addEventListener('click', () => {
@@ -138,8 +139,8 @@ const createCard = (name, link) => {
     openPopup(popupExpansion);
 
     imgExpansion.src = cardImg.src;
-    titleExpansion.innerText = cardTitle.innerText;
-    imgExpansion.alt = cardTitle.innerText;
+    titleExpansion.textContent = cardTitle.textContent;
+    imgExpansion.alt = cardTitle.textContent;
   });
 
   return card;
