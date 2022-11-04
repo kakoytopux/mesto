@@ -28,12 +28,12 @@ const initialCards = [
 const editButton = document.querySelector('.profile__edit');
 const addButton = document.querySelector('.profile__add-content');
 
-const popup = document.querySelectorAll('.popup');
+const popups = document.querySelectorAll('.popup');
 const popupEdit = document.querySelector('.popup_type_edit');
 const popupAdd = document.querySelector('.popup_type_add');
 const popupExpansion = document.querySelector('.popup_type_expansion');
 
-const popupExit = document.querySelectorAll('.close');
+const popupsOutputs = document.querySelectorAll('.close');
 
 const formEdit = document.querySelector('.popup__form-edit');
 const formAdd = document.querySelector('.popup__form-add');
@@ -57,20 +57,19 @@ const templateCard = document.querySelector('.pattern-card').content;
 const openPopup = element => {
   element.classList.add('popup_opened');
 
-  element.addEventListener('keydown', evt => {
-    if (evt.key === 'Escape') {
-      closePopup(element);
-    }
-  });
+  element.addEventListener('keydown', closePopupEscape);
 }
 const closePopup = element => {
   element.classList.remove('popup_opened');
 
-  element.removeEventListener('keydown', evt => {
-    if (evt.key === 'Escape') {
-      closePopup(element);
-    }
-  });
+  element.removeEventListener('keydown', closePopupEscape);
+}
+const closePopupEscape = evt => {
+  if (evt.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_opened');
+
+    closePopup(openedPopup);
+  }
 }
 
 const searchEvent = element => {
@@ -84,8 +83,8 @@ const searchEvent = element => {
     });
   });
 }
-searchEvent(popupExit);
-searchEvent(popup);
+searchEvent(popupsOutputs);
+searchEvent(popups);
 
 const openPopupEdit = () => {
   openPopup(popupEdit);
@@ -152,8 +151,8 @@ const renderCard = element => {
 }
 
 // перебор массива
-initialCards.reverse().forEach(nameArray => {
-  renderCard(createCard(nameArray.name, nameArray.link));
+initialCards.reverse().forEach(cardObj => {
+  renderCard(createCard(cardObj.name, cardObj.link));
 });
 
 // создание карточки
