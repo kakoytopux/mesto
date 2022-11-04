@@ -4,5 +4,7 @@
   line-height: 15px;
   color: #FF0000;
   margin-top: 5px;
-  display: none;
+  display: block;
+  height: 30px;
+  max-width: 320px;
 }

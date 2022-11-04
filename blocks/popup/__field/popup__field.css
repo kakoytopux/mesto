@@ -4,10 +4,24 @@
   border: 0;
   border-bottom: 1px solid rgba(0, 0, 0, .2);
   width: 358px;
-  margin-top: 30px;
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
+}
+.popup__field::placeholder {
+  color: #C4C4C4;
+}
+.popup__field::-moz-placeholder {
+  color: #C4C4C4;
+}
+.popup__field::-o-placeholder {
+  color: #C4C4C4;
+}
+.popup__field::-webkit-placeholder {
+  color: #C4C4C4;
+}
+.popup__field::-ms-placeholder {
+  color: #C4C4C4;
 }
 .popup__field:first-of-type {
   margin-top: 48px;

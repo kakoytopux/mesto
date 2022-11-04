@@ -39,7 +39,6 @@
 @import url(../blocks/popup/__field/_error/popup__field_error.css);
 @import url(../blocks/popup/__error/popup__error.css);
 @import url(../blocks/popup/__submit/_inactive/popup__submit_inactive.css);
-@import url(../blocks/popup/__error/_visible/popup__error_visible.css);
 
 @import url(../blocks/button-hover/button-hover.css);
 
