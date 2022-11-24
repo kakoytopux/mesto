@@ -1,8 +1,9 @@
 import {Card} from "./Card.js";
+import {initialCards} from "./initialCards.js";
 import {FormValidator} from "./FormValidator.js";
 
-const editButton = document.querySelector('.profile__edit');
-const addButton = document.querySelector('.profile__add-content');
+const buttonEdit = document.querySelector('.profile__edit');
+const buttonAdd = document.querySelector('.profile__add-content');
 
 const popups = document.querySelectorAll('.popup');
 const popupEdit = document.querySelector('.popup_type_edit');
@@ -20,6 +21,8 @@ const fieldLink = document.querySelector('.popup__field_type_link');
 
 const profileName = document.querySelector('.profile__name');
 const profileDesc = document.querySelector('.profile__description');
+
+const cards = document.querySelector('.cards');
 
 // popup open/close
 export const openPopup = element => {
@@ -89,9 +92,43 @@ const addCard = evt => {
   closePopup(popupAdd);
 }
 
+export const openPhotoModal = element => {
+  const popupExpansionImage = document.querySelector('.popup__expansion-img');
+  const popupExpansionTitle = document.querySelector('.popup__expansion-title');
 
-editButton.addEventListener('click', openPopupEdit);
-addButton.addEventListener('click', openPopupAdd);
+  popupExpansionImage.src = element.querySelector('.card__image').src;
+  popupExpansionImage.alt = element.querySelector('.card__title').textContent;
+  popupExpansionTitle.textContent = element.querySelector('.card__title').textContent;
+}
+
+initialCards.reverse().forEach(cardObj => {
+  const card = new Card(cardObj.name, cardObj.link, '.pattern-card');
+  const cardElement = card.generateCard();
+  
+  cards.prepend(cardElement);
+});
+
+
+const enableValidation = config => {
+  const formsList = Array.from(document.querySelectorAll(config.formSelector));
+
+  formsList.forEach(form => {
+    const validate = new FormValidator(config, form);
+    validate.enableValidation();
+  });
+}
+
+enableValidation({
+  formSelector: '.form',
+  inputSelector: '.popup__field',
+  submitButtonSelector: '.popup__submit',
+  inactiveButtonClass: 'popup__submit_inactive',
+  inputErrorClass: 'popup__field_error'
+});
+
+
+buttonEdit.addEventListener('click', openPopupEdit);
+buttonAdd.addEventListener('click', openPopupAdd);
 
 formEdit.addEventListener('submit', editProfile);
 formAdd.addEventListener('submit', addCard);
