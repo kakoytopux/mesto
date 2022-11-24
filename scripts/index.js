@@ -82,7 +82,7 @@ const addCard = evt => {
   evt.preventDefault();
 
   const card = new Card(fieldTitle.value, fieldLink.value, '.pattern-card');
-  const cardElement = card.dataCard();
+  const cardElement = card.generateCard();
   
   document.querySelector('.cards').prepend(cardElement);
 

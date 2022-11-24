@@ -29,25 +29,25 @@ const initialCards = [
 
 export class Card {
   constructor(name, link, templateSelector) {
-    this.name = name;
-    this.link = link;
-    this.templateSelector = templateSelector;
+    this._name = name;
+    this._link = link;
+    this._templateSelector = templateSelector;
   }
 
   _getTemplate() {
-    const templateCard = document.querySelector(this.templateSelector).content;
+    const templateCard = document.querySelector(this._templateSelector).content;
     const card = templateCard.querySelector('.card').cloneNode(true);
 
     return card;
   }
 
-  dataCard() {
+  generateCard() {
     this._element = this._getTemplate();
     this._setEventListeners();
 
-    this._element.querySelector('.card__image').src = this.link;
-    this._element.querySelector('.card__image').alt = this.name;
-    this._element.querySelector('.card__title').textContent = this.name;
+    this._element.querySelector('.card__image').src = this._link;
+    this._element.querySelector('.card__image').alt = this._name;
+    this._element.querySelector('.card__title').textContent = this._name;
 
     return this._element;
   }
@@ -82,7 +82,7 @@ export class Card {
 
 initialCards.reverse().forEach(cardObj => {
   const card = new Card(cardObj.name, cardObj.link, '.pattern-card');
-  const cardElement = card.dataCard();
+  const cardElement = card.generateCard();
   
   document.querySelector('.cards').prepend(cardElement);
 });
