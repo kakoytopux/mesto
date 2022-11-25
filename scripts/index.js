@@ -22,7 +22,9 @@ const fieldLink = document.querySelector('.popup__field_type_link');
 const profileName = document.querySelector('.profile__name');
 const profileDesc = document.querySelector('.profile__description');
 
-const cards = document.querySelector('.cards');
+const cardsContainer = document.querySelector('.cards');
+
+export const popupExpansion = document.querySelector('.popup_type_expansion');
 
 // popup open/close
 export const openPopup = element => {
@@ -81,16 +83,29 @@ const editProfile = evt => {
 }
 
 // создание карточки
+const creatingCard = (name, link, templateSelector) => {
+  const card = new Card(name, link, templateSelector);
+  returnFinishedCard(card);
+}
+const returnFinishedCard = card => {
+  const cardElement = card.generateCard();
+
+  renderCard(cardElement);
+}
+const renderCard = cardElement => {
+  cardsContainer.prepend(cardElement);
+}
+
 const addCard = evt => {
   evt.preventDefault();
 
-  const card = new Card(fieldTitle.value, fieldLink.value, '.pattern-card');
-  const cardElement = card.generateCard();
-  
-  document.querySelector('.cards').prepend(cardElement);
+  creatingCard(fieldTitle.value, fieldLink.value, '.pattern-card');
 
   closePopup(popupAdd);
 }
+initialCards.reverse().forEach(cardObj => {
+  creatingCard(cardObj.name, cardObj.link, '.pattern-card');
+});
 
 export const openPhotoModal = element => {
   const popupExpansionImage = document.querySelector('.popup__expansion-img');
@@ -101,19 +116,13 @@ export const openPhotoModal = element => {
   popupExpansionTitle.textContent = element.querySelector('.card__title').textContent;
 }
 
-initialCards.reverse().forEach(cardObj => {
-  const card = new Card(cardObj.name, cardObj.link, '.pattern-card');
-  const cardElement = card.generateCard();
-  
-  cards.prepend(cardElement);
-});
-
-
 const enableValidation = config => {
   const formsList = Array.from(document.querySelectorAll(config.formSelector));
 
   formsList.forEach(form => {
-    const validate = new FormValidator(config, form);
+    const inputsList = Array.from(form.querySelectorAll(config.inputSelector));
+
+    const validate = new FormValidator(config, form, inputsList);
     validate.enableValidation();
   });
 }

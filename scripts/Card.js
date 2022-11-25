@@ -1,4 +1,4 @@
-import {openPhotoModal, openPopup} from "./index.js";
+import {openPhotoModal, openPopup, popupExpansion} from "./index.js";
 
 export class Card {
   constructor(name, link, templateSelector) {
@@ -48,8 +48,6 @@ export class Card {
     this._cardLike.classList.toggle('card__like_active');
   }
   _openImage() {
-    const popupExpansion = document.querySelector('.popup_type_expansion');
-
     openPopup(popupExpansion);
 
     openPhotoModal(this._element);
