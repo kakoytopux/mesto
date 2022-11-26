@@ -83,14 +83,10 @@ const editProfile = evt => {
 }
 
 // создание карточки
-const creatingCard = (name, link, templateSelector) => {
+const createCard = (name, link, templateSelector) => {
   const card = new Card(name, link, templateSelector);
-  returnFinishedCard(card);
-}
-const returnFinishedCard = card => {
-  const cardElement = card.generateCard();
-
-  renderCard(cardElement);
+  
+  return card.generateCard();
 }
 const renderCard = cardElement => {
   cardsContainer.prepend(cardElement);
@@ -99,12 +95,14 @@ const renderCard = cardElement => {
 const addCard = evt => {
   evt.preventDefault();
 
-  creatingCard(fieldTitle.value, fieldLink.value, '.pattern-card');
+  const cardElement = createCard(fieldTitle.value, fieldLink.value, '.pattern-card');
+  renderCard(cardElement);
 
   closePopup(popupAdd);
 }
 initialCards.reverse().forEach(cardObj => {
-  creatingCard(cardObj.name, cardObj.link, '.pattern-card');
+  const cardElement = createCard(cardObj.name, cardObj.link, '.pattern-card');
+  renderCard(cardElement);
 });
 
 export const openPhotoModal = element => {
@@ -121,8 +119,9 @@ const enableValidation = config => {
 
   formsList.forEach(form => {
     const inputsList = Array.from(form.querySelectorAll(config.inputSelector));
+    const button = form.querySelector(config.submitButtonSelector);
 
-    const validate = new FormValidator(config, form, inputsList);
+    const validate = new FormValidator(config, form, inputsList, button);
     validate.enableValidation();
   });
 }

@@ -1,5 +1,5 @@
 export class FormValidator {
-  constructor(config, form, formInput) {
+  constructor(config, form, formInput, buttonSubmit) {
     this._formSelector = config.formSelector;
     this._inputSelector = config.inputSelector;
     this._submitButtonSelector = config.submitButtonSelector;
@@ -7,6 +7,7 @@ export class FormValidator {
     this._inputErrorClass = config.inputErrorClass;
     this._form = form;
     this._formInput = formInput;
+    this._buttonSubmit = buttonSubmit;
   }
 
   _showErrorValid(formInput, errorMessage) {
@@ -37,24 +38,22 @@ export class FormValidator {
     });
   }
 
+  _disableSubmitButton() {
+    this._buttonSubmit.classList.add(this._inactiveButtonClass);
+    this._buttonSubmit.disabled = true;
+  }
   _toggleButtonState() {
-    const button = this._form.querySelector(this._submitButtonSelector);
-  
     if (this._checkValidBtn()) {
-      button.classList.add(this._inactiveButtonClass);
-      button.disabled = true;
+      this._disableSubmitButton();
     } else {
-      button.classList.remove(this._inactiveButtonClass);
-      button.disabled = false;
+      this._buttonSubmit.classList.remove(this._inactiveButtonClass);
+      this._buttonSubmit.disabled = false;
     }
   }
   returnValidationSubmit() {
-    const button = this._form.querySelector(this._submitButtonSelector);
-  
     this._form.addEventListener('submit', () => {
       if (!this._checkValidBtn()) {
-        button.classList.add(this._inactiveButtonClass);
-        button.disabled = true;
+        this._disableSubmitButton();
       }
     });
   }
