@@ -29,14 +29,8 @@ export const buttonEdit = document.querySelector('.profile__edit');
 export const buttonAdd = document.querySelector('.profile__add-content');
 
 export const popups = document.querySelectorAll('.popup');
-export const popupEdit = document.querySelector('.popup_type_edit');
-export const popupAdd = document.querySelector('.popup_type_add');
-
-export const popupsOutputs = document.querySelectorAll('.close');
 
 export const fieldName = document.querySelector('.popup__field_type_name');
 export const fieldDesc = document.querySelector('.popup__field_type_desc');
 
 export const cardsContainer = document.querySelector('.cards');
-
-export const popupExpansion = document.querySelector('.popup_type_expansion');

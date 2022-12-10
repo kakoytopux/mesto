@@ -2,15 +2,10 @@ import './pages/index.css';
 import {
   initialCards,
   buttonAdd, 
-  buttonEdit, 
-  popups, 
-  popupEdit, 
-  popupAdd, 
-  popupsOutputs,
+  buttonEdit,
   fieldName,
   fieldDesc,
   cardsContainer, 
-  popupExpansion
 } from "./utils/constants.js";
 import { Card } from "./components/Card.js";
 import { FormValidator } from "./components/FormValidator.js";
@@ -27,7 +22,7 @@ const userProfile = new UserInfo({
 });
 
 const openPopupEdit = () => {
-  popupFormEdit.open(popupEdit);
+  popupFormEdit.open();
 
   const userInfo = userProfile.getUserInfo();
 
@@ -35,43 +30,39 @@ const openPopupEdit = () => {
   fieldDesc.value = userInfo.desc.textContent;
 }
 const openPopupAdd = () => {
-  popupFormAdd.open(popupAdd);
+  popupFormAdd.open();
 }
 
 // profile edit
-const popupOpenImage = new PopupWithImage();
-
-const popupFormEdit = new PopupWithForm('.popup__form-edit', {submit: fieldObj => {
+const popupFormEdit = new PopupWithForm('.popup_type_edit', {submit: fieldObj => {
   userProfile.setUserInfo(fieldObj);
 
-  popupFormEdit.close(popupEdit);
+  popupFormEdit.close();
 }});
+popupFormEdit.setEventListeners();
 
 // создание карточек
-const popupFormAdd = new PopupWithForm('.popup__form-add', {submit: fieldObj => {
-  const card = new Card(fieldObj, '.pattern-card', {handleCardClick: element => {
-    popupFormAdd.open(popupExpansion);
+const popupOpenImage = new PopupWithImage('.popup_type_expansion');
+popupOpenImage.setEventListeners();
 
-    popupOpenImage.open(element);
+const createCard = item => {
+  const card = new Card(item, '.pattern-card', {handleCardClick: (link, title) => {
+    popupOpenImage.open(link, title);
   }});
-
   const cardElement = card.generateCard();
-  cardsList.addItem(cardElement);
 
-  popupFormAdd.close(popupAdd);
+  return cardElement;
+}
+
+const popupFormAdd = new PopupWithForm('.popup_type_add', {submit: fieldObj => {
+  cardsList.addItem(createCard(fieldObj));
+
+  popupFormAdd.close();
 }});
-popupFormEdit.setEventListeners(popups);
-popupFormAdd.setEventListeners(popupsOutputs);
+popupFormAdd.setEventListeners();
 
 const cardsList = new Section({items: initialCards, renderer: cardItem => {
-  const card = new Card(cardItem, '.pattern-card', {handleCardClick: element => {
-    popupFormAdd.open(popupExpansion);
-
-    popupOpenImage.open(element);
-  }});
-
-  const cardElement = card.generateCard();
-  cardsList.addItem(cardElement);
+  cardsList.addItem(createCard(cardItem));
 }}, cardsContainer);
 
 cardsList.renderItems();
@@ -81,10 +72,7 @@ const enableValidation = config => {
   const formsList = Array.from(document.querySelectorAll(config.formSelector));
 
   formsList.forEach(form => {
-    const inputsList = Array.from(form.querySelectorAll(config.inputSelector));
-    const button = form.querySelector(config.submitButtonSelector);
-
-    const validate = new FormValidator(config, form, inputsList, button);
+    const validate = new FormValidator(config, form);
     validate.enableValidation();
   });
 }

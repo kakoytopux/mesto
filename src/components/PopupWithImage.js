@@ -1,12 +1,16 @@
 import { Popup } from "./Popup.js";
 
 export class PopupWithImage extends Popup {
-  open(element) {
-    const popupExpansionImage = document.querySelector('.popup__expansion-img');
-    const popupExpansionTitle = document.querySelector('.popup__expansion-title');
+  constructor(popupElement) {
+    super(popupElement);
+    this.expansionImg = document.querySelector('.popup__expansion-img');
+    this.expansionTitle = document.querySelector('.popup__expansion-title');
+  }
+  open(link, title) {
+    super.open();
 
-    popupExpansionImage.src = element.querySelector('.card__image').src;
-    popupExpansionImage.alt = element.querySelector('.card__title').textContent;
-    popupExpansionTitle.textContent = element.querySelector('.card__title').textContent;
+    this.expansionImg.src = link;
+    this.expansionImg.alt = title;
+    this.expansionTitle.textContent = title;
   }
 }

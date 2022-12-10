@@ -2,33 +2,30 @@ export class Popup {
   constructor(popupElement) {
     this._popupElement = document.querySelector(popupElement);
     this._handleEscClose = this._handleEscClose.bind(this);
+    this._popupsOutputs = document.querySelectorAll('.close');
   }
-  open(element) {
-    element.classList.add('popup_opened');
+  open() {
+    this._popupElement.classList.add('popup_opened');
 
-    element.addEventListener('keydown', this._handleEscClose);
+    document.addEventListener('keydown', this._handleEscClose);
   }
-  close(element) {
-    element.classList.remove('popup_opened');
+  close() {
+    this._popupElement.classList.remove('popup_opened');
 
-    element.removeEventListener('keydown', this._handleEscClose);
+    document.removeEventListener('keydown', this._handleEscClose);
   }
-  setEventListeners(element) {
-    element.forEach(item => {
-      const nearest = item.closest('.popup');
+  setEventListeners() {
+    this._popupsOutputs.forEach(item => item.addEventListener('click', () => this.close()));
       
-      item.addEventListener('click', evt => {
-        if (evt.target === item) {
-          this.close(nearest);
-        }
-      });
+    this._popupElement.addEventListener('click', evt => {
+      if (evt.target === this._popupElement) {
+        this.close();
+      }
     });
   }
   _handleEscClose(evt) {
-    const nearest = this._popupElement.closest('.popup');
-    
     if (evt.key === 'Escape') {
-      this.close(nearest);
+      this.close();
     }
   }
 }
