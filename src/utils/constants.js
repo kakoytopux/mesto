@@ -34,9 +34,6 @@ export const popupAdd = document.querySelector('.popup_type_add');
 
 export const popupsOutputs = document.querySelectorAll('.close');
 
-export const formEdit = document.querySelector('.popup__form-edit');
-export const formAdd = document.querySelector('.popup__form-add');
-
 export const fieldName = document.querySelector('.popup__field_type_name');
 export const fieldDesc = document.querySelector('.popup__field_type_desc');
 

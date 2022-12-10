@@ -1,4 +1,4 @@
-import '../index.css';
+import './pages/index.css';
 import {
   initialCards,
   buttonAdd, 
@@ -9,33 +9,25 @@ import {
   popupsOutputs,
   fieldName,
   fieldDesc,
-  formEdit, 
-  formAdd,
   cardsContainer, 
   popupExpansion
-} from "../utils/constants.js";
-import { Card } from "../components/Card.js";
-import { FormValidator } from "../components/FormValidator.js";
-import { Section } from "../components/Section.js";
-import { Popup } from "../components/Popup.js";
-import { UserInfo } from "../components/UserInfo.js";
-import { PopupWithForm } from "../components/PopupWithForm.js";
-import { PopupWithImage } from "../components/PopupWithImage.js";
+} from "./utils/constants.js";
+import { Card } from "./components/Card.js";
+import { FormValidator } from "./components/FormValidator.js";
+import { Section } from "./components/Section.js";
+import { UserInfo } from "./components/UserInfo.js";
+import { PopupWithForm } from "./components/PopupWithForm.js";
+import { PopupWithImage } from "./components/PopupWithImage.js";
 
 
 // popup open/close
-const popup = new Popup(popups);
-
-popup.setEventListeners(popupsOutputs);
-popup.setEventListeners(popups);
-
 const userProfile = new UserInfo({
   userName: '.profile__name', 
   userDesc: '.profile__description'
 });
 
 const openPopupEdit = () => {
-  popup.open(popupEdit);
+  popupFormEdit.open(popupEdit);
 
   const userInfo = userProfile.getUserInfo();
 
@@ -43,38 +35,38 @@ const openPopupEdit = () => {
   fieldDesc.value = userInfo.desc.textContent;
 }
 const openPopupAdd = () => {
-  popup.open(popupAdd);
+  popupFormAdd.open(popupAdd);
 }
 
 // profile edit
-const cardFormEdit = new PopupWithForm(formEdit, {submit: fieldObj => {
+const popupOpenImage = new PopupWithImage();
+
+const popupFormEdit = new PopupWithForm('.popup__form-edit', {submit: fieldObj => {
   userProfile.setUserInfo(fieldObj);
 
-  popup.close(popupEdit);
+  popupFormEdit.close(popupEdit);
 }});
-cardFormEdit.setEventListeners();
 
 // создание карточек
-const cardFormAdd = new PopupWithForm(formAdd, {submit: fieldObj => {
+const popupFormAdd = new PopupWithForm('.popup__form-add', {submit: fieldObj => {
   const card = new Card(fieldObj, '.pattern-card', {handleCardClick: element => {
-    popup.open(popupExpansion);
+    popupFormAdd.open(popupExpansion);
 
-    const popupOpenImage = new PopupWithImage();
     popupOpenImage.open(element);
   }});
 
   const cardElement = card.generateCard();
   cardsList.addItem(cardElement);
 
-  popup.close(popupAdd);
+  popupFormAdd.close(popupAdd);
 }});
-cardFormAdd.setEventListeners();
+popupFormEdit.setEventListeners(popups);
+popupFormAdd.setEventListeners(popupsOutputs);
 
 const cardsList = new Section({items: initialCards, renderer: cardItem => {
   const card = new Card(cardItem, '.pattern-card', {handleCardClick: element => {
-    popup.open(popupExpansion);
+    popupFormAdd.open(popupExpansion);
 
-    const popupOpenImage = new PopupWithImage();
     popupOpenImage.open(element);
   }});
 
