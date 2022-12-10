@@ -5,8 +5,8 @@ export class UserInfo {
   }
   getUserInfo() {
     const userInfoObj = {
-      name: this._name,
-      desc: this._desc
+      name: this._name.textContent,
+      desc: this._desc.textContent
     };
 
     return userInfoObj;

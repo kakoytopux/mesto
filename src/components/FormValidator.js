@@ -9,7 +9,6 @@ export class FormValidator {
     this._formInput = Array.from(form.querySelectorAll(config.inputSelector));
     this._buttonSubmit = form.querySelector(config.submitButtonSelector);
   }
-
   _showErrorValid(formInput, errorMessage) {
     const errorText = this._form.querySelector(`.${formInput.id}-error`);
   

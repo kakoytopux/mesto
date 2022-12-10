@@ -1,4 +1,4 @@
-import './pages/index.css';
+import './index.css';
 import {
   initialCards,
   buttonAdd, 
@@ -6,13 +6,13 @@ import {
   fieldName,
   fieldDesc,
   cardsContainer, 
-} from "./utils/constants.js";
-import { Card } from "./components/Card.js";
-import { FormValidator } from "./components/FormValidator.js";
-import { Section } from "./components/Section.js";
-import { UserInfo } from "./components/UserInfo.js";
-import { PopupWithForm } from "./components/PopupWithForm.js";
-import { PopupWithImage } from "./components/PopupWithImage.js";
+} from "../utils/constants.js";
+import { Card } from "../components/Card.js";
+import { FormValidator } from "../components/FormValidator.js";
+import { Section } from "../components/Section.js";
+import { UserInfo } from "../components/UserInfo.js";
+import { PopupWithForm } from "../components/PopupWithForm.js";
+import { PopupWithImage } from "../components/PopupWithImage.js";
 
 
 // popup open/close
@@ -26,8 +26,8 @@ const openPopupEdit = () => {
 
   const userInfo = userProfile.getUserInfo();
 
-  fieldName.value = userInfo.name.textContent;
-  fieldDesc.value = userInfo.desc.textContent;
+  fieldName.value = userInfo.name;
+  fieldDesc.value = userInfo.desc;
 }
 const openPopupAdd = () => {
   popupFormAdd.open();
