@@ -11,8 +11,8 @@ export class UserInfo {
 
     return userInfoObj;
   }
-  setUserInfo(fieldObj) {
-    this._name.textContent = fieldObj.name;
-    this._desc.textContent = fieldObj.desc;
+  setUserInfo(obj) {
+    this._name.textContent = obj.name;
+    this._desc.textContent = obj.about;
   }
 }

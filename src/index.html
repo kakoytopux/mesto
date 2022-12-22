@@ -38,7 +38,7 @@
       <form class="form" name="profile-edit" novalidate>
         <input type="text" id="title-input" class="popup__field popup__field_type_name" placeholder="Введите имя" required minlength="2" maxlength="40" name="name">
         <span class="popup__error title-input-error"></span>
-        <input type="text" id="description-input" class="popup__field popup__field_type_desc" placeholder="Введите описание" required minlength="2" maxlength="200" name="desc">
+        <input type="text" id="description-input" class="popup__field popup__field_type_desc" placeholder="Введите описание" required minlength="2" maxlength="200" name="about">
         <span class="popup__error description-input-error"></span>
         <button type="submit" class="popup__submit">Сохранить</button>
       </form>
@@ -49,7 +49,7 @@
       <button type="button" class="close" title="Закрыть"></button>
       <h2 class="popup__title">Новое место</h2>
       <form class="form" name="card-add" novalidate>
-        <input type="text" id="name-input" class="popup__field popup__field_type_title" placeholder="Название" required minlength="2" maxlength="30" name="title">
+        <input type="text" id="name-input" class="popup__field popup__field_type_title" placeholder="Название" required minlength="2" maxlength="30" name="name">
         <span class="popup__error name-input-error"></span>
         <input type="url" id="link-input" class="popup__field popup__field_type_link" placeholder="Ссылка на картинку" required name="link">
         <span class="popup__error link-input-error"></span>
@@ -64,13 +64,23 @@
       <h2 class="popup__expansion-title"></h2>
     </div>
   </div>
+  <div class="popup popup_type_delete">
+    <div class="popup__container">
+      <button type="button" class="close" title="Закрыть"></button>
+      <h2 class="popup__title">Вы уверены?</h2>
+      <button type="button" class="popup__submit popup__submit_type_delete">Да</button>
+    </div>
+  </div>
   <template class="pattern-card">
     <article class="card">
       <img src="#" alt="Картинка" class="card__image">
       <button type="button" class="card__delete button-hover" title="Удалить"></button>
       <div class="card__block">
         <h2 class="card__title"></h2>
-        <button type="button" class="card__like" title="Нравится"></button>
+        <div class="card__like-container">
+          <button type="button" class="card__like" title="Нравится"></button>
+          <p class="card__like-quantity">0</p>
+        </div>
       </div>
     </article>
   </template>
