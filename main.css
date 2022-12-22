@@ -4,12 +4,14 @@
 .all-content{margin:0 auto;max-width:880px}
 .cards{-moz-column-gap:17px;column-gap:17px;display:flex;flex-wrap:wrap;margin-top:51px;row-gap:20px}@media screen and (max-width:879px){.cards{gap:20px;justify-content:center;margin-top:36px}}
 .card{background-color:#fff;border-radius:10px;max-width:282px;position:relative}
-.card__block{display:flex;justify-content:space-between;max-width:246px;padding:25px 15px 25px 21px}
+.card__block{align-items:center;display:flex;justify-content:space-between;max-width:246px;padding:15px 15px 18px 21px}
 .card__image{background-color:#000;border-radius:10px 10px 0 0;color:#fff;cursor:pointer;display:block;height:282px;-o-object-fit:cover;object-fit:cover;width:282px}
-.card__like{background-color:transparent;background-image:url(e3b9ba5840ebe97bc077.svg);background-size:22px 19px;border:0;height:19px;margin:5px 5px 0 0;padding:0;transition:opacity .4s ease;width:22px}.card__like:hover{cursor:pointer;opacity:.5}
+.card__like{background-color:transparent;background-image:url(e3b9ba5840ebe97bc077.svg);background-size:22px 19px;border:0;height:19px;margin:5px 0 0;padding:0;transition:opacity .4s ease;width:22px}.card__like:hover{cursor:pointer;opacity:.5}
 .card__title{font-size:24px;font-weight:900;line-height:29px;margin:0;max-width:190px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .card__like_active{background-image:url(35948469632d0421d697.svg)}
 .card__delete{background-color:transparent;background-image:url(ce3b64935accf9b8212e.svg);background-size:18px 19px;border:0;height:19px;padding:0;position:absolute;right:20px;top:20px;transition:opacity .4s ease;width:18px}
+.card__like-quantity{font-size:13px;font-weight:400;line-height:16px;margin:3px 0 0;text-align:center}
+.card__like-container{margin-right:5px}
 .content{margin-top:40px}@media screen and (max-width:879px){.content{margin-top:42px}}
 .footer{margin-top:67px;max-width:318px;padding-bottom:60px}@media screen and (max-width:879px){.footer{margin:48px 0 0 20px;max-width:282px;padding-bottom:36px}}@media screen and (max-width:583px){.footer{margin-left:auto;margin-right:auto}}
 .footer__copyright{color:#545454;font-size:18px;font-weight:400;line-height:22px;margin:0}@media screen and (max-width:583px){.footer__copyright{font-size:14px;line-height:17px}}
