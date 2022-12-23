@@ -135,7 +135,6 @@ popupFormEdit.setEventListeners();
 const popupOpenImage = new PopupWithImage('.popup_type_expansion');
 popupOpenImage.setEventListeners();
 const popupDeleteCard = new PopupWithDelete('.popup_type_delete');
-popupDeleteCard.setEventListeners();
 
 
 const createCard = item => {
@@ -143,7 +142,10 @@ const createCard = item => {
     popupOpenImage.open(link, title);
   }, 
   handleDeleteClick: card => {
-    popupDeleteCard.open(card);
+    popupDeleteCard.open();
+    popupDeleteCard.setEventListeners(card, {deleteCard: () => {
+      deleteCard(item._id);
+    }});
   },
   likeCardApi: () => {
     likeCardApi(item._id);

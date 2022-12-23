@@ -5,16 +5,18 @@ export class PopupWithDelete extends Popup {
     super(popupElement);
     this._btn = document.querySelector('.popup__submit_type_delete');
   }
-  open(card) {
+  open() {
     super.open();
+  }
+  setEventListeners(card, {deleteCard}) {
+    super.setEventListeners();
 
     this._card = card;
-  }
-  setEventListeners() {
-    super.setEventListeners();
+    this._deleteCard = deleteCard;
 
     this._btn.addEventListener('click', () => {
       this._card.remove();
+      this._deleteCard();
       this.close();
     });
   }
