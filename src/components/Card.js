@@ -38,7 +38,7 @@ export class Card {
       this._likeCardApi();
 
       if(this._cardLike.classList.contains('card__like_active')) {
-        this._cardQuantity.textContent += + + '1';
+        this._cardQuantity.textContent = +this._cardQuantity.textContent + +'1';
       } else {
         this._cardQuantity.textContent -= '1';
       }
