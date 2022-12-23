@@ -72,8 +72,8 @@ const addCard = data => {
   return data;
 }
 
-const deleteCard = card => {
-  fetch(`https://mesto.nomoreparties.co/v1/cohort-56/cards/${card}`, {
+const deleteCard = cardId => {
+  fetch(`https://mesto.nomoreparties.co/v1/cohort-56/cards/${cardId}`, {
     method: 'DELETE',
     headers: {
       authorization: '69da42e9-c870-41de-9737-f87ee868307d',
@@ -82,6 +82,25 @@ const deleteCard = card => {
   })
 }
 
+
+const likeCardApi = cardId => {
+  fetch(`https://mesto.nomoreparties.co/v1/cohort-56/cards/${cardId}/likes`, {
+    method: 'PUT',
+    headers: {
+      authorization: '69da42e9-c870-41de-9737-f87ee868307d',
+      'Content-Type': 'application/json'
+    }
+  })
+}
+const deleteLikeCardApi = cardId => {
+  fetch(`https://mesto.nomoreparties.co/v1/cohort-56/cards/${cardId}/likes`, {
+    method: 'DELETE',
+    headers: {
+      authorization: '69da42e9-c870-41de-9737-f87ee868307d',
+      'Content-Type': 'application/json'
+    }
+  })
+}
 
 // popup open/close
 const userProfile = new UserInfo({
@@ -125,17 +144,24 @@ const createCard = item => {
   }, 
   handleDeleteClick: card => {
     popupDeleteCard.open(card);
+  },
+  likeCardApi: () => {
+    likeCardApi(item._id);
+    deleteLikeCardApi(item._id);
   }
 });
   const cardElement = card.generateCard();
-  
+
   if(item.owner && item.owner._id != 'be7982533e9ad05e501feb39') {
     cardElement.querySelector('.card__delete').remove();
   }
   if(item.likes) {
     cardElement.querySelector('.card__like-quantity').textContent = item.likes.length;
   }
-
+  if(item.likes) {
+    card.likeCardApiUser();
+  }
+  
   return cardElement;
 }
 
