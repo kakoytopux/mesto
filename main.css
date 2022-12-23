@@ -10,7 +10,7 @@
 .card__title{font-size:24px;font-weight:900;line-height:29px;margin:0;max-width:190px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .card__like_active{background-image:url(35948469632d0421d697.svg)}
 .card__delete{background-color:transparent;background-image:url(ce3b64935accf9b8212e.svg);background-size:18px 19px;border:0;height:19px;padding:0;position:absolute;right:20px;top:20px;transition:opacity .4s ease;width:18px}
-.card__like-quantity{font-size:13px;font-weight:400;line-height:16px;margin:3px 0 0;text-align:center}
+.card__like-quantity{font-size:13px;font-weight:400;line-height:16px;margin:3px 0 0;max-width:22px;overflow:hidden;text-align:center;text-overflow:ellipsis;white-space:nowrap}
 .card__like-container{margin-right:5px}
 .content{margin-top:40px}@media screen and (max-width:879px){.content{margin-top:42px}}
 .footer{margin-top:67px;max-width:318px;padding-bottom:60px}@media screen and (max-width:879px){.footer{margin:48px 0 0 20px;max-width:282px;padding-bottom:36px}}@media screen and (max-width:583px){.footer{margin-left:auto;margin-right:auto}}
