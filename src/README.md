@@ -12,6 +12,7 @@
 6. **Псевдоклассы.**
 7. **GridLayout.**
 8. **ООП.**
+9. **API.**
 -----
 
 **Ссылка проекта на GitHub Pages: https://puxichh.github.io/mesto/**

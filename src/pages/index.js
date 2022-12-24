@@ -18,6 +18,17 @@ import { PopupWithDelete } from '../components/PopupWithDelete.js';
 import { PopupWithAvatar } from '../components/PopupWithAvatar.js';
 
 
+
+const renderLoading = (isLoading, elementsObj) => {
+  if(isLoading) {
+    document.querySelector(elementsObj.popup)
+    .querySelector('.popup__submit').textContent = 'Сохранение...';
+  } else {
+    document.querySelector(elementsObj.popup)
+    .querySelector('.popup__submit').textContent = elementsObj.text;
+  }
+}
+
 fetch('https://mesto.nomoreparties.co/v1/cohort-56/users/me', {
   method: 'GET',
   headers: {
@@ -29,7 +40,6 @@ fetch('https://mesto.nomoreparties.co/v1/cohort-56/users/me', {
   setUserInfo(res);
   profileAvatar.src = res.avatar;
 });
-
 const editProfile = data => {
   fetch('https://mesto.nomoreparties.co/v1/cohort-56/users/me', {
     method: 'PATCH',
@@ -41,6 +51,10 @@ const editProfile = data => {
       name: data.name,
       about: data.about
     })
+  })
+  .finally(() => {
+    renderLoading(false, {text: 'Сохранить', popup: '.popup_type_edit'});
+    popupFormEdit.close();
   })
 
   return data;
@@ -57,7 +71,6 @@ fetch('https://mesto.nomoreparties.co/v1/cohort-56/cards', {
 .then(res => {
   prependCard(res).renderItems();
 });
-
 const addCard = data => {
   fetch('https://mesto.nomoreparties.co/v1/cohort-56/cards', {
     method: 'POST',
@@ -70,10 +83,13 @@ const addCard = data => {
       link: data.link,
     })
   })
+  .finally(() => {
+    renderLoading(false, {text: 'Создать', popup: '.popup_type_add'});
+    popupFormAdd.close();
+  })
 
   return data;
 }
-
 const deleteCard = cardId => {
   fetch(`https://mesto.nomoreparties.co/v1/cohort-56/cards/${cardId}`, {
     method: 'DELETE',
@@ -106,13 +122,20 @@ const deleteLikeCardApi = cardId => {
 
 
 const editAvatarApi = avatarLink => {
-  fetch(`https://mesto.nomoreparties.co/v1/cohort-56/users/me/${avatarLink}`, {
+  fetch(`https://mesto.nomoreparties.co/v1/cohort-56/users/me/avatar`, {
     method: 'PATCH',
     headers: {
       authorization: '69da42e9-c870-41de-9737-f87ee868307d',
       'Content-Type': 'application/json'
-    }
-  });
+    },
+    body: JSON.stringify({
+      avatar: avatarLink
+    })
+  })
+  .finally(() => {
+    renderLoading(false, {text: 'Сохранить', popup: '.popup_type_edit-avatar'});
+    popupFormAvatar.close();
+  })
 }
 
 
@@ -145,7 +168,7 @@ const openFormAvatar = () => {
 const popupFormEdit = new PopupWithForm('.popup_type_edit', {submit: fieldObj => {
   setUserInfo(editProfile(fieldObj));
 
-  popupFormEdit.close();
+  renderLoading(true, {popup: '.popup_type_edit'});
 }});
 popupFormEdit.setEventListeners();
 
@@ -193,12 +216,12 @@ const prependCard = obj => {
   return cardsList;
 }
 
-const popupFormAdd = new PopupWithForm('.popup_type_add', {submit: fieldObj => {
+const popupFormAdd = new PopupWithForm('.popup_type_add', {submit: fieldObj => {  
   const cardsList = prependCard();
   
   cardsList.addItem(createCard(addCard(fieldObj)));
 
-  popupFormAdd.close();
+  renderLoading(true, {popup: '.popup_type_add'});
 }});
 popupFormAdd.setEventListeners();
 
@@ -207,7 +230,7 @@ const popupFormAvatar = new PopupWithForm('.popup_type_edit-avatar', {submit: fi
   withAvatar.getUserAvatar(fieldObj.edit);
   editAvatarApi(fieldObj.edit);
 
-  popupFormAvatar.close();
+  renderLoading(true, {popup: '.popup_type_edit-avatar'});
 }});
 popupFormAvatar.setEventListeners();
 

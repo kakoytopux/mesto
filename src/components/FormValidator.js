@@ -51,7 +51,7 @@ export class FormValidator {
   }
   returnValidationSubmit() {
     this._form.addEventListener('submit', () => {
-      if (this._checkValidBtn()) {
+      if (!this._checkValidBtn()) {
         this._disableSubmitButton();
       }
     });
