@@ -1,0 +1,10 @@
+.profile__avatar-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  border-radius: 50%;
+}
+.profile__avatar-container:hover .profile__avatar-edit-btn-container {
+  visibility: visible;
+  opacity: 1;
+}

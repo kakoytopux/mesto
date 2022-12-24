@@ -1,0 +1,10 @@
+.profile__avatar-edit-btn {
+  background-image: url(../../../images/edit-avatar-btn.svg);
+  background-size: 26px 26px;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+}

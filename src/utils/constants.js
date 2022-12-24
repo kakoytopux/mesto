@@ -1,5 +1,6 @@
 export const buttonEdit = document.querySelector('.profile__edit');
 export const buttonAdd = document.querySelector('.profile__add-content');
+export const buttonAvatarEdit = document.querySelector('.profile__avatar-container');
 
 export const popups = document.querySelectorAll('.popup');
 

@@ -5,7 +5,8 @@ import {
   fieldName,
   fieldDesc,
   cardsContainer,
-  profileAvatar
+  profileAvatar,
+  buttonAvatarEdit
 } from "../utils/constants.js";
 import { Card } from "../components/Card.js";
 import { FormValidator } from "../components/FormValidator.js";
@@ -14,6 +15,7 @@ import { UserInfo } from "../components/UserInfo.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
 import { PopupWithImage } from "../components/PopupWithImage.js";
 import { PopupWithDelete } from '../components/PopupWithDelete.js';
+import { PopupWithAvatar } from '../components/PopupWithAvatar.js';
 
 
 fetch('https://mesto.nomoreparties.co/v1/cohort-56/users/me', {
@@ -79,7 +81,7 @@ const deleteCard = cardId => {
       authorization: '69da42e9-c870-41de-9737-f87ee868307d',
       'Content-Type': 'application/json'
     }
-  })
+  });
 }
 
 
@@ -90,7 +92,7 @@ const likeCardApi = cardId => {
       authorization: '69da42e9-c870-41de-9737-f87ee868307d',
       'Content-Type': 'application/json'
     }
-  })
+  });
 }
 const deleteLikeCardApi = cardId => {
   fetch(`https://mesto.nomoreparties.co/v1/cohort-56/cards/${cardId}/likes`, {
@@ -99,8 +101,20 @@ const deleteLikeCardApi = cardId => {
       authorization: '69da42e9-c870-41de-9737-f87ee868307d',
       'Content-Type': 'application/json'
     }
-  })
+  });
 }
+
+
+const editAvatarApi = avatarLink => {
+  fetch(`https://mesto.nomoreparties.co/v1/cohort-56/users/me/${avatarLink}`, {
+    method: 'PATCH',
+    headers: {
+      authorization: '69da42e9-c870-41de-9737-f87ee868307d',
+      'Content-Type': 'application/json'
+    }
+  });
+}
+
 
 // popup open/close
 const userProfile = new UserInfo({
@@ -110,6 +124,7 @@ const userProfile = new UserInfo({
 const setUserInfo = obj => {
   userProfile.setUserInfo(obj);
 }
+const withAvatar = new PopupWithAvatar('.popup_type_edit-avatar', '.profile__avatar');
 
 const openPopupEdit = () => {
   popupFormEdit.open();
@@ -121,6 +136,9 @@ const openPopupEdit = () => {
 }
 const openPopupAdd = () => {
   popupFormAdd.open();
+}
+const openFormAvatar = () => {
+  popupFormAvatar.open();
 }
 
 // profile edit
@@ -184,6 +202,15 @@ const popupFormAdd = new PopupWithForm('.popup_type_add', {submit: fieldObj => {
 }});
 popupFormAdd.setEventListeners();
 
+// avatar edit
+const popupFormAvatar = new PopupWithForm('.popup_type_edit-avatar', {submit: fieldObj => {
+  withAvatar.getUserAvatar(fieldObj.edit);
+  editAvatarApi(fieldObj.edit);
+
+  popupFormAvatar.close();
+}});
+popupFormAvatar.setEventListeners();
+
 
 const enableValidation = config => {
   const formsList = Array.from(document.querySelectorAll(config.formSelector));
@@ -205,3 +232,4 @@ enableValidation({
 
 buttonEdit.addEventListener('click', openPopupEdit);
 buttonAdd.addEventListener('click', openPopupAdd);
+buttonAvatarEdit.addEventListener('click', openFormAvatar);

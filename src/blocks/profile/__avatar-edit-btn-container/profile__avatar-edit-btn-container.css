@@ -1,0 +1,16 @@
+.profile__avatar-edit-btn-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 47%;
+  background-color: rgba(0, 0, 0, .8);
+  cursor: pointer;
+  visibility: hidden;
+  opacity: 0;
+  transition: all .4s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
