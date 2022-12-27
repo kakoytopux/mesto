@@ -10,3 +10,5 @@ export const fieldDesc = document.querySelector('.popup__field_type_desc');
 export const cardsContainer = document.querySelector('.cards');
 
 export const profileAvatar = document.querySelector('.profile__avatar');
+
+export const dataUser = {};
