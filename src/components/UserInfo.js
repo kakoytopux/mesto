@@ -16,7 +16,7 @@ export class UserInfo {
     this._name.textContent = obj.name;
     this._desc.textContent = obj.about;
   }
-  getUserAvatar(field) {
+  setUserAvatar(field) {
     this._avatar.src = field;
   }
 }

@@ -6,7 +6,6 @@ import {
   fieldName,
   fieldDesc,
   cardsContainer,
-  profileAvatar,
   buttonAvatarEdit,
   dataUser
 } from '../utils/constants.js';
@@ -32,68 +31,73 @@ const api = new Api({
 });
 
 // Функции для взаимодействия с сервером
+
 // Информация профиля и создание карточек
 Promise.all([
   api.infoProfile(),
   api.getInitialCards()
 ])
-.then(res => {
-  setUserInfo(res[0]);
-  profileAvatar.src = res[0].avatar;
-  dataUser.userInfo = res[0];
-  prependCard(res[1]).renderItems();
+.then(([user, cards]) => {
+  setUserInfo(user);
+  userProfile.setUserAvatar(user.avatar);
+  dataUser.userInfo = user;
+  cardsSection.renderItems(cards);
 })
 .catch(err => console.log(err));
 // функция редактирования профиля
 const editProfile = fieldObj => {
   api.editProfile(fieldObj)
-  .then(() => popupFormEdit.close())
+  .then(res => {
+    setUserInfo(res);
+    popupFormEdit.close();
+  })
   .catch(err => console.log(err))
   .finally(() => {
     renderLoading(false, {text: 'Сохранить', popup: '.popup_type_edit'});
   });
-
-  return fieldObj;
 }
 // функция добавления карточки
 const addCard = fieldObj => {
   api.addCard(fieldObj)
-  .then(() => popupFormAdd.close())
+  .then(res => {
+    cardsSection.addItem(createCard(res));
+    popupFormAdd.close();
+  })
   .catch(err => console.log(err))
   .finally(() => {
     renderLoading(false, {text: 'Создать', popup: '.popup_type_add'});
   });
-
-  return fieldObj;
 }
 // функция удаления карточки
-const deleteCard = (item, card, {close}) => {
-  api.deleteCard(item._id, card, close)
+const deleteCard = card => {
+  api.deleteCard(card.cardId)
   .then(() => {
-    card.remove();
-    close();
+    card._element.remove();
+    popupDeleteCard.close();
   })
   .catch(err => console.log(err));
 }
 // лайк карточки
-const likeCard = item => {
-  api.likeCard(item._id)
+const likeCard = card => {
+  api.likeCard(card.cardId)
+  .then(res => {
+    card.setLikes(res);
+  })
   .catch(err => console.log(err));
-
-  return item;
 }
 // удаление лайка с карточки
-const deleteLikeCard = item => {
-  api.deleteLikeCard(item._id)
+const deleteLikeCard = card => {
+  api.deleteLikeCard(card.cardId)
+  .then(res => {
+    card.setLikes(res);
+  })
   .catch(err => console.log(err));
-
-  return item;
 }
 // функция изменения аватара
 const editAvatar = fieldObj => {
   api.editAvatar(fieldObj.edit)
   .then(() => {
-    userProfile.getUserAvatar(fieldObj.edit);
+    userProfile.setUserAvatar(fieldObj.edit);
     popupFormAvatar.close();
   })
   .catch(err => console.log(err))
@@ -130,7 +134,7 @@ const openFormAvatar = () => {
 
 // profile edit
 const popupFormEdit = new PopupWithForm('.popup_type_edit', {submit: fieldObj => {
-  setUserInfo(editProfile(fieldObj));
+  editProfile(fieldObj);
 
   renderLoading(true, {popup: '.popup_type_edit'});
 }});
@@ -139,42 +143,41 @@ popupFormEdit.setEventListeners();
 // все, что связано с карточками
 const popupOpenImage = new PopupWithImage('.popup_type_expansion');
 popupOpenImage.setEventListeners();
-const popupDeleteCard = new PopupWithDelete('.popup_type_delete');
-
+const popupDeleteCard = new PopupWithDelete('.popup_type_delete', {deleteCard: card => {
+  deleteCard(card);
+}});
+popupDeleteCard.setEventListeners();
 
 const createCard = item => {
   const card = new Card(item, '.pattern-card', {dataUser, handleCardClick: (link, title) => {
     popupOpenImage.open(link, title);
-  }, 
-  handleDeleteClick: card => {
+  },
+  handleDeleteClick: () => {
     popupDeleteCard.open();
-    popupDeleteCard.setEventListeners({deleteCard: close => {
-      deleteCard(item, card, close);
-    }});
+    popupDeleteCard.setCardDelete(card);
   },
   likeCardApi: () => {
-    card.setLikes(likeCard(item));
-    card.setLikes(deleteLikeCard(item));
+    if(!card.isLiked()) {
+      likeCard(card);
+    } else {
+      deleteLikeCard(card);
+    }
   }
 });
+
   const cardElement = card.generateCard();
   
   return cardElement;
 }
 
-const prependCard = obj => {
-  const cardsList = new Section({items: obj, renderer: cardItem => {
-    cardsList.addItem(createCard(cardItem));
-  }}, cardsContainer);
+const cardsSection = new Section({renderer: cardItem => {
+  cardsSection.addItem(createCard(cardItem));
+}}, cardsContainer);
 
-  return cardsList;
-}
 
 // popup добавления карточки пользователем
 const popupFormAdd = new PopupWithForm('.popup_type_add', {submit: fieldObj => {  
-  const cardsList = prependCard();
-  
-  cardsList.addItem(createCard(addCard(fieldObj)));
+  addCard(fieldObj);
 
   renderLoading(true, {popup: '.popup_type_add'});
 }});
