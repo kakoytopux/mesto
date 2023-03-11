@@ -15,4 +15,4 @@
 9. **API.**
 -----
 
-**Ссылка проекта на GitHub Pages: https://puxichh.github.io/mesto/**
+**Ссылка проекта на GitHub Pages: https://kakoytopux.github.io/mesto/**
